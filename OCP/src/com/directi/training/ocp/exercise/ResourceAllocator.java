@@ -65,3 +65,48 @@ public class ResourceAllocator
         return 0;
     }
 }
+/*@startuml
+class ResourceAllocator {
+    {static} int INVALID_RESOURCE_ID
+    allocate(ResourceType resourceType): int
+    free(ResourceType resourceType, int resourceId):void
+    private markSpaceSlotFree(int resourceId): void
+    private void markTimeSlotFree(int resourceId):void
+    private void markSpaceSlotBusy(int resourceId): void
+    private int findFreeSpaceSlot() : int
+    private void markTimeSlotBusy(int resourceId):void
+    private int findFreeTimeSlot(): int
+}
+enum ResourceType {
+    TIME_SLOT,
+    SPACE_SLOT
+}
+ResourceAllocator----->ResourceType
+@enduml */
+
+@startuml
+class ResourceAllocator {
+    {static} int INVALID_RESOURCE_ID
+    allocate(Resource resource): int
+    free(Resource resource, int resourceId):void
+}
+abstract class Resource {
+    {abstract} findSlot(): int
+    {abstract} markSlotBusy(int resourceId): void
+    {abstract} markSlotFree(int resourceId): void
+}
+class TimeResource {
+    findSlot(): int
+    markSlotBusy(int resourceId): void
+    markSlotFree(int resourceId): void
+}
+class SpaceResource {
+    findSlot(): int
+    markSlotBusy(int resourceId): void
+    markSlotFree(int resourceId): void
+}
+
+Resource <|--- TimeResource
+Resource <|--- SpaceResource
+ResourceAllocator--->Resource
+@enduml
