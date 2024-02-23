@@ -1,5 +1,3 @@
-package com.directi.training.lsp.exercise;
-
 public class ElectronicDuck extends Duck
 {
     private boolean _on = false;
@@ -10,7 +8,8 @@ public class ElectronicDuck extends Duck
         if (_on) {
             System.out.println("Electronic duck quack...");
         } else {
-            throw new RuntimeException("Can't quack when off");
+           // throw new RuntimeException("Can't quack when off");
+            System.out.println("Electronic duck quack...");
         }
     }
 
@@ -34,26 +33,3 @@ public class ElectronicDuck extends Duck
         _on = false;
     }
 }
-
-
-@startuml
-class Duck {
-    quack(): void
-    swim(): void
-}
-class ElectronicDuck {
-    _on: boolean
-    quack(): void
-    swim(): void
-    turnOff(): void
-    turnOn(): void
-}
-class Pool {
-    quack(): void
-    swim(): void
-    run(): void
-}
-
-Duck <|--- ElectronicDuck
-Pool--- Duck
-@enduml
