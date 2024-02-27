@@ -1,0 +1,34 @@
+@startuml
+class EncodingModule {
+    +encodeWithFiles(): void
+    +encodeBasedOnNetworkAndDatabase(): void
+}
+
+class EncodingModuleClient {
+    +main(args: String[]): void
+}
+
+class MyDatabase {
+    -_data: Map<Integer, String>
+    -_count: int
+    +write(inputString: String): int
+}
+
+class BufferedReader {
+    +read()
+}
+
+class BufferedWriter {
+    +write()
+}
+
+class Base64Encoder {
+    +encode()
+}
+
+EncodingModule --|> MyDatabase : <uses>
+EncodingModule --|> BufferedReader : <uses>
+EncodingModule --|> BufferedWriter : <uses>
+EncodingModule --|> Base64Encoder : <uses>
+EncodingModuleClient --> EncodingModule : <<create>>
+@enduml

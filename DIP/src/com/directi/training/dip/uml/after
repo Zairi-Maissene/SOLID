@@ -1,0 +1,51 @@
+@startuml
+interface DataReader {
+    +readData(): String
+}
+
+interface DataWriter {
+    +writeData(data: String): void
+}
+
+interface DataStorage {
+    +write(data: String): int
+}
+
+class FileDataReader implements DataReader {
+    +FileDataReader(filePath: String)
+    +readData(): String
+}
+
+class FileDataWriter implements DataWriter {
+    +FileDataWriter(filePath: String)
+    +writeData(data: String): void
+}
+
+class Base64Encoder {
+    +encode(data: String): String
+}
+
+class MyDatabase implements DataStorage {
+    +write(data: String): int
+}
+
+class EncodingModule {
+    -dataReader: DataReader
+    -dataWriter: DataWriter
+    -base64Encoder: Base64Encoder
+    -dataStorage: DataStorage
+
+    +EncodingModule(dataReader: DataReader, dataWriter: DataWriter, base64Encoder: Base64Encoder, dataStorage: DataStorage)
+    +encode(): void
+}
+
+class EncodingModuleClient {
+    +main(args: String[]): void
+}
+
+EncodingModule --> DataReader
+EncodingModule --> DataWriter
+EncodingModule --> Base64Encoder
+EncodingModule --> DataStorage
+EncodingModuleClient --> EncodingModule
+@enduml
