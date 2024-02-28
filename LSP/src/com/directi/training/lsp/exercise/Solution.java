@@ -8,8 +8,7 @@ public class ElectronicDuck extends Duck
         if (_on) {
             System.out.println("Electronic duck quack...");
         } else {
-           // throw new RuntimeException("Can't quack when off");
-            System.out.println("Electronic duck quack...");
+            System.out.println("Electronic duck is turned off and cannot quack");
         }
     }
 
@@ -19,7 +18,7 @@ public class ElectronicDuck extends Duck
         if (_on) {
             System.out.println("Electronic duck swim");
         } else {
-            throw new RuntimeException("Can't swim when off");
+            System.out.println("Electronic duck is turned off and cannot swim");
         }
     }
 

@@ -1,6 +1,14 @@
 // EXECICE DIAGRAM CLASS
 /*
 @startuml
+interface Door {
+    lock(): void
+    unlock(): void
+    open(): void
+    close(): void
+    timeOutCallback(): void
+    proximityCallback(): void
+}
 class Timer {
     register(long,Door): void
 }
@@ -32,14 +40,7 @@ class SensingDoor {
     timeOutCallback(): void
     proximityCallback(): void
 }
-interface Door {
-    lock(): void
-    unlock(): void
-    open(): void
-    close(): void
-    timeOutCallback(): void
-    proximityCallback(): void
-}
+
 SensingDoor -[dashed]-> Door
 TimedDoor -[dashed]-> Door
 
@@ -66,8 +67,6 @@ class TimedDoor {
     unlock(): void
     open(): void
     close(): void
-    timeOutCallback(): void
-    proximityCallback(): void
 }
 class Sensor {
     register(Door): void
@@ -82,7 +81,6 @@ class SensingDoor {
     unlock(): void
     open(): void
     close(): void
-    timeOutCallback(): void
     proximityCallback(): void
 }
 interface Door {
@@ -90,25 +88,23 @@ interface Door {
     unlock(): void
     open(): void
     close(): void
-    timeOutCallback(): void
-    proximityCallback(): void
 }
-interface TimeOutCallback {
+interface ITimeOut{
     timeOutCallback(): void
 }
-interface ProximityCallback {
+interface IProximity {
     proximityCallback(): void
 }
 
-SensingDoor -[dashed]-> ProximityCallback
+SensingDoor -[dashed]-> IProximity
 SensingDoor -[dashed]-> Door
 
 TimedDoor -[dashed]-> Door
-TimedDoor -[dashed]-> TimeOutCallback
+TimedDoor -[dashed]-> ITimeOut
 
 SensingDoor ---- Sensor
 TimedDoor ---- Timer
-timeOutCallback ---- Timer
-Sensor ---- ProximityCallback
+ITimeOut ---- Timer
+Sensor ---- IProximity
 
 @enduml
